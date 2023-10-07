@@ -1,0 +1,57 @@
+/* ═══════════════════════════════════════════
+   SDR KIDS LAB — SPACE DARK THEME
+   Deep space blue + gold + signal cyan
+   ═══════════════════════════════════════════ */
+
+[data-theme="dark"] {
+  /* Backgrounds */
+  --color-bg: #0a1628;
+  --color-bg-elevated: #0f1f3a;
+  --color-surface: #152847;
+  --color-hover: rgba(212, 169, 76, 0.08);
+
+  /* Text */
+  --color-text: #e8e6e3;
+  --color-text-secondary: #7a8da6;
+
+  /* Accent — Gold */
+  --color-accent: #d4a94c;
+  --color-accent-hover: #e0b85e;
+  --color-accent-shadow: rgba(212, 169, 76, 0.25);
+  --color-accent-subtle: rgba(212, 169, 76, 0.1);
+
+  /* Signal — Cyan */
+  --color-signal: #00bcd4;
+  --color-signal-subtle: rgba(0, 188, 212, 0.1);
+
+  /* Semantic */
+  --color-success: #2ecc71;
+  --color-success-subtle: rgba(46, 204, 113, 0.12);
+  --color-warning: #f39c12;
+  --color-warning-subtle: rgba(243, 156, 18, 0.12);
+  --color-danger: #e74c3c;
+  --color-danger-subtle: rgba(231, 76, 60, 0.12);
+
+  /* Border & Shadow */
+  --color-border: rgba(212, 169, 76, 0.12);
+  --color-shadow: rgba(0, 0, 0, 0.4);
+
+  /* Gradient */
+  --gradient-hero: linear-gradient(135deg, #0f1f3a 0%, #0a1628 50%, #091422 100%);
+
+  color-scheme: dark;
+}
+
+/* Starfield-like background for body */
+[data-theme="dark"] body {
+  background-color: #0a1628;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.08) 50%, transparent 50%),
+    radial-gradient(1px 1px at 30% 45%, rgba(255,255,255,0.06) 50%, transparent 50%),
+    radial-gradient(1px 1px at 50% 25%, rgba(255,255,255,0.07) 50%, transparent 50%),
+    radial-gradient(1px 1px at 70% 65%, rgba(255,255,255,0.05) 50%, transparent 50%),
+    radial-gradient(1px 1px at 90% 35%, rgba(255,255,255,0.08) 50%, transparent 50%),
+    radial-gradient(1px 1px at 15% 75%, rgba(255,255,255,0.04) 50%, transparent 50%),
+    radial-gradient(1px 1px at 85% 85%, rgba(255,255,255,0.06) 50%, transparent 50%);
+  color: #e8e6e3;
+}

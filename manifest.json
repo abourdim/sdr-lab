@@ -1,0 +1,14 @@
+{
+  "name": "SDR Kids Lab",
+  "short_name": "SDR Lab",
+  "description": "Discover the invisible world of radio waves! Interactive SDR education for kids and beginners.",
+  "version": "1.0.0",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#0a1628",
+  "orientation": "any",
+  "categories": ["education", "science"],
+  "lang": "en",
+  "scope": "./"
+}

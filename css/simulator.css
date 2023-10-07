@@ -1,0 +1,403 @@
+/* ═══════════════════════════════════════════
+   SDR KIDS LAB — SIMULATOR STYLES v0.2.0
+   ═══════════════════════════════════════════ */
+
+/* ── SIMULATOR CONTAINER ── */
+.sim-panel {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.sim-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-sm);
+}
+
+.sim-panel__title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--color-accent);
+}
+
+.sim-panel__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.sim-panel__body {
+  position: relative;
+}
+
+.sim-panel__canvas-wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* ── SPECTRUM DISPLAY ── */
+.sim-spectrum {
+  width: 100%;
+  height: 200px;
+  display: block;
+}
+
+/* ── WATERFALL DISPLAY ── */
+.sim-waterfall {
+  width: 100%;
+  height: 150px;
+  display: block;
+}
+
+/* ── MODULATION DISPLAY ── */
+.sim-modulation {
+  width: 100%;
+  height: 280px;
+  display: block;
+}
+
+/* ── ANTENNA DISPLAY ── */
+.sim-antenna {
+  width: 300px;
+  height: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ── RANGE DISPLAY ── */
+.sim-range {
+  width: 100%;
+  height: 220px;
+  display: block;
+}
+
+/* ── CONTROLS ── */
+.sim-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.sim-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 120px;
+}
+
+.sim-control__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-text-secondary);
+}
+
+.sim-control__value {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-signal);
+}
+
+.sim-control select,
+.sim-control input[type="range"] {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  accent-color: var(--color-accent);
+  min-height: 32px;
+}
+
+.sim-control select:focus,
+.sim-control input:focus {
+  border-color: var(--color-accent);
+  outline: none;
+}
+
+.sim-control input[type="range"] {
+  width: 120px;
+  padding: 0;
+}
+
+/* ── SIM BUTTON GROUP ── */
+.sim-btn-group {
+  display: flex;
+  gap: 2px;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+
+.sim-btn {
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.sim-btn:hover {
+  background: var(--color-hover);
+  color: var(--color-text);
+}
+
+.sim-btn--active {
+  background: var(--color-accent) !important;
+  color: var(--color-bg) !important;
+}
+
+/* ── SCENE SELECTOR ── */
+.sim-scene-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+.sim-scene-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.sim-scene-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.sim-scene-card--active {
+  border-color: var(--color-signal);
+  background: var(--color-signal-subtle);
+}
+
+.sim-scene-card__name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: var(--space-xs);
+}
+
+.sim-scene-card__desc {
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* ── LAB STYLES ── */
+.lab {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.lab__header {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.lab__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.lab__icon {
+  font-size: 1.5rem;
+}
+
+.lab__title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.lab__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.lab__time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.lab__progress-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-left: auto;
+}
+
+.lab__progress-bar {
+  height: 4px;
+  background: var(--color-surface);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.lab__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-signal));
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.lab__step {
+  padding: var(--space-lg);
+}
+
+.lab__step-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  color: var(--color-signal);
+}
+
+.lab__step-instruction {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.lab__hint {
+  background: var(--color-warning-subtle);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.85rem;
+  margin-top: var(--space-sm);
+}
+
+.lab__hint-icon {
+  margin-right: var(--space-xs);
+}
+
+.lab__sim-area {
+  padding: 0 var(--space-md);
+  min-height: 100px;
+}
+
+.lab__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ── LAB COMPLETE ── */
+.lab--complete {
+  text-align: center;
+  padding: var(--space-2xl);
+}
+
+.lab__complete-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-md);
+  animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.lab__complete-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.lab__complete-text {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.lab__complete-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+}
+
+/* ── PLAYGROUND ── */
+.playground {
+  margin-top: var(--space-md);
+}
+
+.playground__section {
+  margin-bottom: var(--space-xl);
+}
+
+.playground__section-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+  letter-spacing: 0.5px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .sim-controls {
+    gap: var(--space-sm);
+  }
+
+  .sim-control {
+    min-width: 100px;
+  }
+
+  .sim-antenna {
+    width: 250px;
+    height: 250px;
+  }
+
+  .sim-scene-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lab__actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .playground__dual {
+    grid-template-columns: 1fr !important;
+  }
+}

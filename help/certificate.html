@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SDR Kids Lab — Certificate of Achievement</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Rajdhani:wght@700&family=Nunito:wght@400;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f5f5f5; font-family: 'Nunito', sans-serif; }
+    .cert { width: 800px; max-width: 95vw; background: #fff; padding: 20px; }
+    .cert__border {
+      border: 6px double #d4a94c; border-radius: 20px;
+      padding: 3rem 2.5rem; text-align: center;
+      background: linear-gradient(135deg, #fafaf5 0%, #fff 50%, #faf5e8 100%);
+      position: relative;
+    }
+    .cert__corner { position: absolute; width: 60px; height: 60px; }
+    .cert__corner--tl { top: 12px; left: 12px; border-top: 3px solid #d4a94c; border-left: 3px solid #d4a94c; border-radius: 8px 0 0 0; }
+    .cert__corner--tr { top: 12px; right: 12px; border-top: 3px solid #d4a94c; border-right: 3px solid #d4a94c; border-radius: 0 8px 0 0; }
+    .cert__corner--bl { bottom: 12px; left: 12px; border-bottom: 3px solid #d4a94c; border-left: 3px solid #d4a94c; border-radius: 0 0 0 8px; }
+    .cert__corner--br { bottom: 12px; right: 12px; border-bottom: 3px solid #d4a94c; border-right: 3px solid #d4a94c; border-radius: 0 0 8px 0; }
+    .cert__bismillah { font-family: 'Amiri', serif; font-size: 1.3rem; color: #d4a94c; margin-bottom: 0.75rem; }
+    .cert__emoji { font-size: 3rem; margin: 0.5rem 0; }
+    .cert__title { font-family: 'Rajdhani', sans-serif; font-size: 2.2rem; color: #b8860b; margin: 0.5rem 0; letter-spacing: 2px; }
+    .cert__subtitle { font-size: 1.2rem; color: #5a6f87; margin-bottom: 1.5rem; }
+    .cert__label { color: #8899aa; font-size: 0.95rem; margin-top: 1.5rem; }
+    .cert__name { font-size: 2rem; font-weight: 700; color: #1a2332; margin: 0.25rem 0 1rem; border-bottom: 2px solid #d4a94c; display: inline-block; padding: 0 2rem 0.25rem; min-width: 300px; }
+    .cert__text { color: #5a6f87; font-size: 1rem; line-height: 1.6; margin: 0.75rem auto; max-width: 500px; }
+    .cert__stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1.5rem 0; }
+    .cert__stat { text-align: center; }
+    .cert__stat-val { font-size: 1.3rem; font-weight: 700; color: #b8860b; display: block; }
+    .cert__stat-label { font-size: 0.75rem; color: #8899aa; }
+    .cert__badges { font-size: 1.8rem; margin: 1rem 0; letter-spacing: 4px; }
+    .cert__date { color: #8899aa; font-size: 0.85rem; margin-top: 1.5rem; }
+    .cert__footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e0d5c0; }
+    .cert__sig { text-align: center; }
+    .cert__sig-line { border-top: 1px solid #999; width: 180px; margin: 0.25rem auto 0; }
+    .cert__sig-label { font-size: 0.75rem; color: #8899aa; }
+    .no-print { margin: 2rem auto; text-align: center; }
+    .no-print button { padding: 0.75rem 2rem; background: #d4a94c; color: #fff; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; font-weight: 700; }
+    .no-print button:hover { background: #b8860b; }
+    @media print {
+      body { background: #fff; }
+      .no-print { display: none; }
+      .cert { width: 100%; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="cert">
+      <div class="cert__border">
+        <div class="cert__corner cert__corner--tl"></div>
+        <div class="cert__corner cert__corner--tr"></div>
+        <div class="cert__corner cert__corner--bl"></div>
+        <div class="cert__corner cert__corner--br"></div>
+        <div class="cert__bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+        <div class="cert__emoji">📡</div>
+        <div class="cert__title">CERTIFICATE OF ACHIEVEMENT</div>
+        <div class="cert__subtitle">SDR Kids Lab · Software Defined Radio Education</div>
+        <div class="cert__label">This certifies that</div>
+        <div class="cert__name" contenteditable="true" id="cert-name">Your Name Here</div>
+        <div class="cert__text">has successfully explored the invisible world of radio waves and demonstrated knowledge of Software Defined Radio fundamentals, signal processing, and ethical radio practices.</div>
+        <div class="cert__stats">
+          <div class="cert__stat"><span class="cert__stat-val" id="c-level">—</span><span class="cert__stat-label">Level</span></div>
+          <div class="cert__stat"><span class="cert__stat-val" id="c-modules">—</span><span class="cert__stat-label">Modules</span></div>
+          <div class="cert__stat"><span class="cert__stat-val" id="c-quiz">—</span><span class="cert__stat-label">Quiz Score</span></div>
+          <div class="cert__stat"><span class="cert__stat-val" id="c-xp">—</span><span class="cert__stat-label">XP Earned</span></div>
+        </div>
+        <div class="cert__badges" id="c-badges">🌟 📡 🔧 🧠 🛡️</div>
+        <div class="cert__date" id="c-date"></div>
+        <div class="cert__footer">
+          <div class="cert__sig"><div class="cert__sig-line"></div><div class="cert__sig-label">Student Signature</div></div>
+          <div class="cert__sig"><div class="cert__sig-line"></div><div class="cert__sig-label">Teacher / Parent</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="no-print">
+      <p style="color:#5a6f87;margin-bottom:0.5rem">Click the name to edit it, then print!</p>
+      <button onclick="window.print()">🖨️ Print Certificate</button>
+    </div>
+  </div>
+  <script>document.getElementById('c-date').textContent = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});</script>
+</body>
+</html>

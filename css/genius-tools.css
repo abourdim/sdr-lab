@@ -1,0 +1,139 @@
+/* ═══════════════════════════════════════════
+   SDR KIDS LAB — GENIUS TOOLS CSS
+   ═══════════════════════════════════════════ */
+
+.tools { max-width: 900px; margin: 0 auto; }
+
+.tools__section {
+  margin-bottom: var(--space-2xl);
+}
+
+.tools__hint {
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  border-top: 1px solid var(--color-border);
+}
+
+.tools__input {
+  padding: 0.5rem 0.75rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.tools__input:focus {
+  border-color: var(--color-accent);
+}
+
+.tools__select {
+  padding: 0.5rem 0.75rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+/* ── MORSE CODE ── */
+.tools__morse-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-lg);
+}
+.tools__morse-col h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-sm);
+}
+.tools__morse-display {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  margin: var(--space-sm) 0;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  min-height: 2.5rem;
+  word-break: break-all;
+  color: var(--color-accent);
+}
+.tools__morse-decoded {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+}
+.tools__morse-key {
+  width: 100%;
+  height: 60px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: all 0.1s;
+}
+.tools__morse-key.btn--active {
+  background: var(--color-accent) !important;
+  color: #000 !important;
+  transform: scale(0.96);
+}
+
+/* ── SATELLITE ── */
+.tools__sat-controls {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── ANTENNA RESULTS ── */
+.tools__antenna-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+.antenna-result {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+.antenna-result strong {
+  color: var(--color-accent);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+.antenna-result p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0.25rem 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .tools__morse-grid {
+    grid-template-columns: 1fr;
+  }
+  .tools__sat-grid {
+    grid-template-columns: 1fr !important;
+  }
+  #sat-sky-canvas {
+    margin: 0 auto;
+  }
+  .tools__antenna-results {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .tools__morse-key { height: 80px; font-size: 1.1rem; }
+}

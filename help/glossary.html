@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossary — SDR Kids Lab</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.7; color: #1a2332; }
+    h1 { color: #b8860b; border-bottom: 2px solid #d4a94c; padding-bottom: 0.5rem; }
+    .term { background: #f5f7fa; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; border: 1px solid #e0e6ed; }
+    .term strong { color: #0a1628; font-size: 1.05rem; }
+    .term em { color: #5a6f87; font-size: 0.85rem; }
+    input { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 1.5rem; font-size: 1rem; }
+    a { color: #0097a7; }
+    .back { display: inline-block; margin-bottom: 1rem; color: #0097a7; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="back">← Back to SDR Kids Lab</a>
+  <h1>📚 SDR & Radio Glossary</h1>
+  <input type="text" id="search" placeholder="Search terms..." oninput="filterTerms()">
+
+  <div id="terms">
+    <div class="term"><strong>ADC</strong> — <em>Analog-to-Digital Converter</em>. Converts analog radio signals into digital data a computer can process.</div>
+    <div class="term"><strong>ADS-B</strong> — <em>Automatic Dependent Surveillance–Broadcast</em>. System used by aircraft to broadcast their position. Can be received with RTL-SDR.</div>
+    <div class="term"><strong>AM</strong> — <em>Amplitude Modulation</em>. A method of encoding information by varying the strength (amplitude) of a radio wave.</div>
+    <div class="term"><strong>Antenna</strong> — A device that sends or receives radio waves. Its size and shape determine which frequencies it works best with.</div>
+    <div class="term"><strong>Bandwidth</strong> — The range of frequencies a signal occupies. Wider bandwidth = more data.</div>
+    <div class="term"><strong>dB (Decibel)</strong> — A unit measuring signal strength. Higher dB = stronger signal.</div>
+    <div class="term"><strong>Demodulation</strong> — The process of extracting the original message from a modulated radio wave.</div>
+    <div class="term"><strong>Dipole Antenna</strong> — A simple antenna made of two equal-length wires. Good for general reception.</div>
+    <div class="term"><strong>DSP</strong> — <em>Digital Signal Processing</em>. Using math and software to analyze and modify signals.</div>
+    <div class="term"><strong>EM Spectrum</strong> — <em>Electromagnetic Spectrum</em>. The full range of electromagnetic radiation, from radio waves to gamma rays.</div>
+    <div class="term"><strong>ESP32</strong> — A low-cost microcontroller with Wi-Fi and Bluetooth, often used in IoT projects.</div>
+    <div class="term"><strong>FFT</strong> — <em>Fast Fourier Transform</em>. A mathematical method to show which frequencies are present in a signal. Creates the spectrum display.</div>
+    <div class="term"><strong>FM</strong> — <em>Frequency Modulation</em>. A method of encoding information by varying the frequency of a radio wave. Used by FM radio stations.</div>
+    <div class="term"><strong>Frequency</strong> — How many times a wave cycles per second, measured in Hertz (Hz). Higher frequency = faster wave.</div>
+    <div class="term"><strong>Gain</strong> — Amplification of a signal. More gain = louder signal, but also more noise.</div>
+    <div class="term"><strong>GNU Radio</strong> — Free, open-source software for SDR signal processing. Uses visual flowgraphs.</div>
+    <div class="term"><strong>HackRF One</strong> — An open-source SDR that can both transmit and receive, covering 1 MHz to 6 GHz.</div>
+    <div class="term"><strong>Half-Duplex</strong> — Can transmit OR receive, but not both at the same time. HackRF One is half-duplex.</div>
+    <div class="term"><strong>Hz (Hertz)</strong> — Unit of frequency. 1 Hz = 1 cycle per second. kHz = thousands, MHz = millions, GHz = billions.</div>
+    <div class="term"><strong>I/Q Data</strong> — <em>In-phase / Quadrature</em>. The raw data format used by SDR receivers to capture radio signals.</div>
+    <div class="term"><strong>IoT</strong> — <em>Internet of Things</em>. Everyday devices connected via wireless communication.</div>
+    <div class="term"><strong>ISM Band</strong> — <em>Industrial, Scientific, Medical</em>. Radio frequencies available for general use without a license (e.g., 433 MHz, 2.4 GHz).</div>
+    <div class="term"><strong>LoRa</strong> — <em>Long Range</em>. A radio technology for sending small amounts of data over very long distances (1-10+ km).</div>
+    <div class="term"><strong>micro:bit</strong> — A small educational computer with a built-in 2.4 GHz radio, perfect for kids' first radio experiments.</div>
+    <div class="term"><strong>Modulation</strong> — The process of putting a message onto a radio wave (a carrier signal).</div>
+    <div class="term"><strong>NOAA</strong> — <em>National Oceanic and Atmospheric Administration</em>. Their weather satellites broadcast images that can be received with SDR.</div>
+    <div class="term"><strong>Noise Floor</strong> — The level of background radio noise. Signals must be stronger than the noise floor to be detected.</div>
+    <div class="term"><strong>Nyquist Theorem</strong> — To correctly capture a signal, you must sample at least twice its frequency.</div>
+    <div class="term"><strong>RSSI</strong> — <em>Received Signal Strength Indicator</em>. A measurement of how strong a received signal is.</div>
+    <div class="term"><strong>RTL-SDR</strong> — A low-cost USB dongle that receives radio signals from 24 MHz to 1.7 GHz. Receive-only.</div>
+    <div class="term"><strong>RX</strong> — Receive / Receiver.</div>
+    <div class="term"><strong>Sample Rate</strong> — How many times per second the SDR measures the signal. Higher = more detail.</div>
+    <div class="term"><strong>SDR</strong> — <em>Software Defined Radio</em>. A radio where traditional hardware is replaced by software on a computer.</div>
+    <div class="term"><strong>Spectrum</strong> — A visual display showing signal strength across different frequencies.</div>
+    <div class="term"><strong>Spreading Factor (SF)</strong> — In LoRa, controls the trade-off between range and data speed. Higher SF = longer range, slower speed.</div>
+    <div class="term"><strong>SWR</strong> — <em>Standing Wave Ratio</em>. Measures how well an antenna is matched to its cable. Lower is better.</div>
+    <div class="term"><strong>TX</strong> — Transmit / Transmitter.</div>
+    <div class="term"><strong>UHF</strong> — <em>Ultra High Frequency</em>. 300 MHz to 3 GHz.</div>
+    <div class="term"><strong>VHF</strong> — <em>Very High Frequency</em>. 30 MHz to 300 MHz.</div>
+    <div class="term"><strong>Waterfall</strong> — A scrolling display that shows signals over time. Frequency on x-axis, time on y-axis, color = strength.</div>
+    <div class="term"><strong>Wavelength</strong> — The physical length of one wave cycle. Longer wavelength = lower frequency.</div>
+  </div>
+
+  <script>
+    function filterTerms() {
+      const q = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('.term').forEach(t => {
+        t.style.display = t.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

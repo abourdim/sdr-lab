@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SDR Kids Lab — Learn Software Defined Radio, interactive educational app">
+  <meta name="theme-color" content="#0a1628">
+  <title>SDR Kids Lab</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dark-theme.css" id="theme-dark">
+  <link rel="stylesheet" href="css/light-theme.css" id="theme-light" disabled>
+  <link rel="stylesheet" href="css/module-content.css">
+  <link rel="stylesheet" href="css/simulator.css">
+  <link rel="stylesheet" href="css/accessibility.css">
+  <link rel="stylesheet" href="css/gamification.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="stylesheet" href="css/genius-tools.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SPLASH SCREEN                          -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="splash-screen" class="splash" aria-label="Loading SDR Kids Lab">
+    <div class="splash__geometric-border">
+      <svg class="splash__pattern" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <g class="splash__star" opacity="0.3">
+          <polygon points="100,10 120,80 195,80 135,120 155,195 100,150 45,195 65,120 5,80 80,80" fill="none" stroke="currentColor" stroke-width="1"/>
+        </g>
+        <g class="splash__star splash__star--inner" opacity="0.2">
+          <polygon points="100,30 115,78 170,78 125,108 140,165 100,135 60,165 75,108 30,78 85,78" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        </g>
+      </svg>
+    </div>
+    <div class="splash__content">
+      <div class="splash__waves">
+        <span class="splash__wave"></span>
+        <span class="splash__wave"></span>
+        <span class="splash__wave"></span>
+        <span class="splash__wave"></span>
+        <span class="splash__wave"></span>
+      </div>
+      <h1 class="splash__title">📡 SDR Kids Lab</h1>
+      <p class="splash__subtitle">Discover the invisible world of radio</p>
+      <div class="splash__loader">
+        <div class="splash__loader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- MAIN APP                               -->
+  <!-- ══════════════════════════════════════ -->
+  <div id="app" class="app" hidden>
+
+    <!-- ── BISMILLAH HEADER ── -->
+    <header class="bismillah-header" aria-label="Bismillah">
+      <div class="bismillah-header__decoration bismillah-header__decoration--left">
+        <svg viewBox="0 0 60 20" class="bismillah-header__ornament"><use href="#ornament-line"/></svg>
+      </div>
+      <span class="bismillah-header__text">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</span>
+      <div class="bismillah-header__decoration bismillah-header__decoration--right">
+        <svg viewBox="0 0 60 20" class="bismillah-header__ornament"><use href="#ornament-line"/></svg>
+      </div>
+    </header>
+
+    <!-- ── TOP NAV BAR ── -->
+    <nav class="topbar" role="navigation" aria-label="Top navigation">
+      <button class="topbar__menu-btn" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div class="topbar__brand">
+        <span class="topbar__icon">📡</span>
+        <span class="topbar__title">SDR Kids Lab</span>
+        <span class="topbar__version">v1.0.0</span>
+      </div>
+      <div class="topbar__breadcrumb" id="breadcrumb" aria-label="Breadcrumb">
+        <span class="breadcrumb__item breadcrumb__item--home" data-route="home">Home</span>
+      </div>
+      <div class="topbar__actions">
+        <button class="topbar__btn" id="search-toggle" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="topbar__btn" id="theme-toggle" aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sun" hidden><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="topbar__btn" id="settings-toggle" aria-label="Settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+        <button class="topbar__btn" id="help-toggle" aria-label="Help">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ── SEARCH OVERLAY ── -->
+    <div class="search-overlay" id="search-overlay" hidden>
+      <div class="search-overlay__box">
+        <input type="text" class="search-overlay__input" id="search-input" placeholder="Search modules, terms, concepts..." aria-label="Search content">
+        <button class="search-overlay__close" id="search-close" aria-label="Close search">✕</button>
+        <div class="search-overlay__results" id="search-results"></div>
+      </div>
+    </div>
+
+    <!-- ── LAYOUT: SIDEBAR + MAIN ── -->
+    <div class="layout">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar" role="navigation" aria-label="Module navigation">
+        <div class="sidebar__header">
+          <span class="sidebar__label">Modules</span>
+          <button class="sidebar__close" id="sidebar-close" aria-label="Close sidebar">✕</button>
+        </div>
+
+        <div class="sidebar__level-selector">
+          <label class="sidebar__level-label">Level:</label>
+          <div class="sidebar__level-btns" role="radiogroup" aria-label="Difficulty level">
+            <button class="sidebar__level-btn sidebar__level-btn--active" data-level="newb" role="radio" aria-checked="true">🟢 Newb</button>
+            <button class="sidebar__level-btn" data-level="explorer" role="radio" aria-checked="false">🟡 Explorer</button>
+            <button class="sidebar__level-btn" data-level="developer" role="radio" aria-checked="false">🔴 Developer</button>
+          </div>
+        </div>
+
+        <nav class="sidebar__modules" id="module-list">
+          <!-- Populated by JS -->
+        </nav>
+
+        <div class="sidebar__progress">
+          <div class="sidebar__progress-label">Overall Progress</div>
+          <div class="sidebar__progress-bar">
+            <div class="sidebar__progress-fill" id="overall-progress" style="width: 0%"></div>
+          </div>
+          <span class="sidebar__progress-text" id="progress-text">0 / 15 modules</span>
+        </div>
+
+        <div class="sidebar__footer">
+          <div class="sidebar__xp">
+            <span id="player-level">⭐ Radio Rookie</span>
+            <div class="sidebar__xp-bar-bg"><div class="sidebar__xp-bar-fill" id="xp-bar"></div></div>
+            <span id="xp-text">0 XP — Level 1</span>
+          </div>
+          <button class="sidebar__footer-btn" data-route="progress">📊 Progress</button>
+          <button class="sidebar__footer-btn" data-route="tools">🧠 Genius Tools</button>
+          <button class="sidebar__footer-btn" data-route="dashboard">👩‍🏫 Dashboard</button>
+          <button class="sidebar__footer-btn" data-route="help">❓ Help</button>
+          <button class="sidebar__footer-btn" data-route="settings">⚙️ Settings</button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main" id="main-content" role="main" aria-live="polite">
+        <a href="#main-content" class="skip-link">Skip to content</a>
+
+        <!-- HOME PAGE (default) -->
+        <section class="page page--home" id="page-home">
+          <div class="home">
+            <div class="home__hero">
+              <div class="home__hero-pattern"></div>
+              <div class="home__hero-content">
+                <h1 class="home__title">
+                  <span class="home__title-icon">📡</span>
+                  <span>SDR Kids Lab</span>
+                </h1>
+                <p class="home__tagline">Discover the invisible world of radio waves</p>
+                <p class="home__description">Join <strong>Mouhammed the Radio Explorer</strong> on an epic journey through the electromagnetic spectrum. Learn how radio works, build antennas, decode signals, and become a spectrum detective!</p>
+                <div class="home__actions">
+                  <button class="btn btn--primary btn--lg" data-route="module-0">
+                    🚀 Start Adventure
+                  </button>
+                  <button class="btn btn--outline btn--lg" data-route="playground">
+                    🧪 Simulator Lab
+                  </button>
+                  <button class="btn btn--outline btn--lg" data-route="tools">
+                    🧠 Genius Tools
+                  </button>
+                  <button class="btn btn--outline btn--lg" data-route="settings">
+                    ⚙️ Setup
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Home Content -->
+            <div class="home-dynamic" id="home-dynamic"></div>
+
+            <div class="home__modules-grid" id="home-modules">
+              <!-- Populated by JS -->
+            </div>
+
+            <div class="home__hardware">
+              <h2 class="home__section-title">Hardware You'll Explore</h2>
+              <div class="home__hardware-grid">
+                <div class="home__hardware-card">
+                  <div class="home__hardware-icon">📟</div>
+                  <h3>micro:bit</h3>
+                  <p>Your first radio — send messages through the air!</p>
+                  <span class="badge badge--safe">Kids ✋</span>
+                </div>
+                <div class="home__hardware-card">
+                  <div class="home__hardware-icon">🔌</div>
+                  <h3>ESP32 + LoRa</h3>
+                  <p>Long range IoT radio — talk across a whole city!</p>
+                  <span class="badge badge--safe">Kids ✋</span>
+                </div>
+                <div class="home__hardware-card">
+                  <div class="home__hardware-icon">📻</div>
+                  <h3>RTL-SDR</h3>
+                  <p>Plug in and hear the invisible world — your main SDR tool!</p>
+                  <span class="badge badge--safe">Kids Primary ✋</span>
+                </div>
+                <div class="home__hardware-card">
+                  <div class="home__hardware-icon">🔬</div>
+                  <h3>HackRF One</h3>
+                  <p>Advanced transmit + receive SDR — for teachers and developers.</p>
+                  <span class="badge badge--locked">Advanced 🔒</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SETTINGS PAGE -->
+        <section class="page page--settings" id="page-settings" hidden>
+          <div class="settings">
+            <h2 class="settings__title">⚙️ Settings</h2>
+
+            <div class="settings__group">
+              <h3 class="settings__group-title">Appearance</h3>
+              <div class="settings__item">
+                <label>Theme</label>
+                <div class="settings__toggle-group">
+                  <button class="settings__toggle-btn settings__toggle-btn--active" data-setting="theme" data-value="dark">🌌 Space Dark</button>
+                  <button class="settings__toggle-btn" data-setting="theme" data-value="light">☁️ Sky Light</button>
+                </div>
+              </div>
+              <div class="settings__item">
+                <label>Font Size</label>
+                <div class="settings__range">
+                  <input type="range" min="12" max="24" value="16" id="font-size-slider" aria-label="Font size">
+                  <span id="font-size-value">16px</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings__group">
+              <h3 class="settings__group-title">Learning</h3>
+              <div class="settings__item">
+                <label>Difficulty Level</label>
+                <div class="settings__toggle-group">
+                  <button class="settings__toggle-btn settings__toggle-btn--active" data-setting="level" data-value="newb">🟢 Newb</button>
+                  <button class="settings__toggle-btn" data-setting="level" data-value="explorer">🟡 Explorer</button>
+                  <button class="settings__toggle-btn" data-setting="level" data-value="developer">🔴 Developer</button>
+                </div>
+              </div>
+              <div class="settings__item">
+                <label>Role</label>
+                <div class="settings__toggle-group">
+                  <button class="settings__toggle-btn settings__toggle-btn--active" data-setting="role" data-value="student">🎓 Student</button>
+                  <button class="settings__toggle-btn" data-setting="role" data-value="teacher">👨‍🏫 Teacher</button>
+                  <button class="settings__toggle-btn" data-setting="role" data-value="parent">👨‍👩‍👦 Parent</button>
+                </div>
+              </div>
+              <div class="settings__item">
+                <label>Language (greetings &amp; UI hints)</label>
+                <div class="settings__toggle-group">
+                  <button class="settings__toggle-btn settings__toggle-btn--active" data-setting="lang" data-value="en">🇬🇧 English</button>
+                  <button class="settings__toggle-btn" data-setting="lang" data-value="fr">🇫🇷 Français</button>
+                  <button class="settings__toggle-btn" data-setting="lang" data-value="ar">🇸🇦 العربية</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings__group">
+              <h3 class="settings__group-title">Sound</h3>
+              <div class="settings__item">
+                <label>Sound Effects</label>
+                <div class="settings__toggle-group">
+                  <button class="settings__toggle-btn settings__toggle-btn--active" data-setting="sound" data-value="on">🔊 On</button>
+                  <button class="settings__toggle-btn" data-setting="sound" data-value="off">🔇 Off</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings__group">
+              <h3 class="settings__group-title">Accessibility</h3>
+              <div class="settings__item">
+                <label>High Contrast</label>
+                <div class="settings__toggle-group">
+                  <button class="settings__toggle-btn" data-setting="contrast" data-value="on">On</button>
+                  <button class="settings__toggle-btn settings__toggle-btn--active" data-setting="contrast" data-value="off">Off</button>
+                </div>
+              </div>
+              <div class="settings__item">
+                <label>Dyslexia Font</label>
+                <div class="settings__toggle-group">
+                  <button class="settings__toggle-btn" data-setting="dyslexia" data-value="on">On</button>
+                  <button class="settings__toggle-btn settings__toggle-btn--active" data-setting="dyslexia" data-value="off">Off</button>
+                </div>
+              </div>
+              <div class="settings__item">
+                <label>Reduced Motion</label>
+                <div class="settings__toggle-group">
+                  <button class="settings__toggle-btn" data-setting="motion" data-value="reduced">Reduced</button>
+                  <button class="settings__toggle-btn settings__toggle-btn--active" data-setting="motion" data-value="full">Full</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings__group">
+              <h3 class="settings__group-title">Data</h3>
+              <div class="settings__item">
+                <label>Export Progress</label>
+                <button class="btn btn--outline" id="export-btn">📤 Export JSON</button>
+              </div>
+              <div class="settings__item">
+                <label>Import Progress</label>
+                <button class="btn btn--outline" id="import-btn">📥 Import JSON</button>
+                <input type="file" id="import-file" accept=".json" hidden>
+              </div>
+              <div class="settings__item">
+                <label>Reset All Data</label>
+                <button class="btn btn--danger" id="reset-btn">🗑️ Reset Everything</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- HELP PAGE -->
+        <section class="page page--help" id="page-help" hidden>
+          <div class="help-page">
+            <h2 class="help-page__title">❓ Help Center</h2>
+            <div class="help-page__grid">
+              <a class="help-page__card" href="help/faq.html" target="_blank">
+                <span class="help-page__card-icon">📋</span>
+                <h3>FAQ</h3>
+                <p>Frequently asked questions</p>
+              </a>
+              <a class="help-page__card" href="help/howto.html" target="_blank">
+                <span class="help-page__card-icon">📖</span>
+                <h3>How To Use</h3>
+                <p>Step-by-step guide</p>
+              </a>
+              <a class="help-page__card" href="help/glossary.html" target="_blank">
+                <span class="help-page__card-icon">📚</span>
+                <h3>Glossary</h3>
+                <p>SDR & radio terms</p>
+              </a>
+              <a class="help-page__card" href="help/rtlsdr-guide.html" target="_blank">
+                <span class="help-page__card-icon">📻</span>
+                <h3>RTL-SDR Guide</h3>
+                <p>Kids primary SDR tool</p>
+              </a>
+              <a class="help-page__card" href="help/hackrf-guide.html" target="_blank">
+                <span class="help-page__card-icon">🔬</span>
+                <h3>HackRF Guide</h3>
+                <p>Advanced SDR tool</p>
+              </a>
+              <a class="help-page__card" href="help/teachers-guide.html" target="_blank">
+                <span class="help-page__card-icon">👨‍🏫</span>
+                <h3>Teacher Guide</h3>
+                <p>Classroom lesson plans</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- SIMULATOR PLAYGROUND -->
+        <section class="page page--playground" id="page-playground" hidden>
+          <div class="playground">
+            <h2 class="settings__title">🧪 Simulator Playground</h2>
+            <p style="color:var(--color-text-secondary);margin-bottom:var(--space-xl)">Explore the SDR simulator engines. Choose a radio scene and watch the signals come alive!</p>
+
+            <!-- Scene Selector -->
+            <div class="playground__section">
+              <h3 class="playground__section-title">📡 Choose a Scene</h3>
+              <div class="sim-scene-grid" id="scene-grid"></div>
+            </div>
+
+            <!-- Spectrum Display -->
+            <div class="playground__section">
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">📊 Spectrum Display</span>
+                  <div class="sim-panel__controls">
+                    <button class="btn btn--sm btn--outline" id="spectrum-toggle">⏸️ Pause</button>
+                    <button class="btn btn--sm btn--outline" id="peaks-toggle">📈 Peaks</button>
+                  </div>
+                </div>
+                <div class="sim-panel__body">
+                  <canvas class="sim-spectrum" id="spectrum-canvas"></canvas>
+                </div>
+                <div class="sim-controls">
+                  <div class="sim-control">
+                    <span class="sim-control__label">Noise Floor</span>
+                    <input type="range" id="noise-slider" min="-120" max="-60" value="-100">
+                    <span class="sim-control__value" id="noise-value">-100 dB</span>
+                  </div>
+                  <div class="sim-control">
+                    <span class="sim-control__label">Color Map</span>
+                    <div class="sim-btn-group" id="colormap-btns">
+                      <button class="sim-btn sim-btn--active" data-map="thermal">Thermal</button>
+                      <button class="sim-btn" data-map="electric">Electric</button>
+                      <button class="sim-btn" data-map="ocean">Ocean</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Waterfall Display -->
+            <div class="playground__section">
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">🌊 Waterfall Display</span>
+                </div>
+                <div class="sim-panel__body">
+                  <canvas class="sim-waterfall" id="waterfall-canvas"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modulation Display -->
+            <div class="playground__section">
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">〰️ Modulation Visualizer</span>
+                </div>
+                <div class="sim-panel__body">
+                  <canvas class="sim-modulation" id="modulation-canvas"></canvas>
+                </div>
+                <div class="sim-controls">
+                  <div class="sim-control">
+                    <span class="sim-control__label">Modulation Type</span>
+                    <div class="sim-btn-group" id="mod-btns">
+                      <button class="sim-btn sim-btn--active" data-mod="am">AM</button>
+                      <button class="sim-btn" data-mod="fm">FM</button>
+                      <button class="sim-btn" data-mod="ask">ASK</button>
+                      <button class="sim-btn" data-mod="fsk">FSK</button>
+                      <button class="sim-btn" data-mod="psk">PSK</button>
+                    </div>
+                  </div>
+                  <div class="sim-control">
+                    <span class="sim-control__label">Carrier Freq</span>
+                    <input type="range" id="carrier-slider" min="5" max="30" value="10">
+                    <span class="sim-control__value" id="carrier-value">10 Hz</span>
+                  </div>
+                  <div class="sim-control">
+                    <span class="sim-control__label">Message Freq</span>
+                    <input type="range" id="message-slider" min="0.5" max="5" value="1" step="0.5">
+                    <span class="sim-control__value" id="message-value">1 Hz</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Antenna + Range side by side -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);" class="playground__section playground__dual">
+              <!-- Antenna Pattern -->
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">📡 Antenna Pattern</span>
+                </div>
+                <div class="sim-panel__body" style="display:flex;justify-content:center;padding:var(--space-md);">
+                  <canvas class="sim-antenna" id="antenna-canvas"></canvas>
+                </div>
+                <div class="sim-controls">
+                  <div class="sim-control">
+                    <span class="sim-control__label">Antenna Type</span>
+                    <select id="antenna-select">
+                      <option value="dipole">Dipole</option>
+                      <option value="monopole">Monopole (Whip)</option>
+                      <option value="yagi">Yagi-Uda</option>
+                      <option value="discone">Discone</option>
+                      <option value="patch">Patch</option>
+                      <option value="parabolic">Parabolic Dish</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Range Calculator -->
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">📏 Range Calculator</span>
+                </div>
+                <div class="sim-panel__body">
+                  <canvas class="sim-range" id="range-canvas"></canvas>
+                </div>
+                <div class="sim-controls">
+                  <div class="sim-control">
+                    <span class="sim-control__label">Device Preset</span>
+                    <select id="range-select">
+                      <option value="lora868">LoRa 868 MHz</option>
+                      <option value="lora433">LoRa 433 MHz</option>
+                      <option value="microbit">micro:bit</option>
+                      <option value="wifi">WiFi 2.4 GHz</option>
+                      <option value="bluetooth">Bluetooth</option>
+                      <option value="fm">FM Broadcast</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── GENIUS TOOLS ── -->
+        <section class="page page--tools" id="page-tools" hidden>
+          <div class="tools">
+            <h2 class="settings__title">🧠 Genius Tools</h2>
+            <p style="color:var(--color-text-secondary);margin-bottom:var(--space-xl)">Advanced interactive tools — real audio analysis, Morse code, satellite tracking, signal puzzles, and antenna design.</p>
+
+            <!-- 1. Live Audio Spectrum -->
+            <div class="tools__section" id="tool-audio">
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">🎤 Live Audio Spectrum Analyzer</span>
+                  <button class="btn btn--sm btn--primary" id="audio-spectrum-btn">🎤 Start Listening</button>
+                </div>
+                <div class="sim-panel__body">
+                  <canvas id="audio-spectrum-canvas" style="width:100%;height:200px;display:block;background:#0a1628;border-radius:8px"></canvas>
+                </div>
+                <p class="tools__hint">Uses your microphone to show a REAL frequency spectrum. Clap, whistle, hum — see the frequencies appear live!</p>
+              </div>
+            </div>
+
+            <!-- 2. Morse Code -->
+            <div class="tools__section" id="tool-morse">
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">📡 Morse Code Transceiver</span>
+                </div>
+                <div class="sim-panel__body" style="padding:var(--space-lg)">
+                  <div class="tools__morse-grid">
+                    <!-- Encoder -->
+                    <div class="tools__morse-col">
+                      <h4>✏️ Encode</h4>
+                      <input type="text" id="morse-input" class="tools__input" placeholder="Type a message..." maxlength="80" autocomplete="off">
+                      <div class="tools__morse-display" id="morse-output" aria-live="polite">· · · — — — · · ·</div>
+                      <button class="btn btn--sm btn--primary" id="morse-play">🔊 Play</button>
+                    </div>
+                    <!-- Decoder -->
+                    <div class="tools__morse-col">
+                      <h4>🔍 Decode</h4>
+                      <input type="text" id="morse-decode-input" class="tools__input" placeholder="Type dots and dashes: .... . .-.. .-.." autocomplete="off">
+                      <div class="tools__morse-display" id="morse-decode-output" aria-live="polite">HELLO</div>
+                    </div>
+                    <!-- Manual Key -->
+                    <div class="tools__morse-col">
+                      <h4>🔑 Manual Key</h4>
+                      <button class="btn btn--lg btn--outline tools__morse-key" id="morse-key">PRESS &amp; HOLD</button>
+                      <div class="tools__morse-display" id="morse-key-output"></div>
+                      <div class="tools__morse-decoded" id="morse-key-decoded"></div>
+                      <button class="btn btn--sm btn--outline" id="morse-key-reset">🔄 Reset</button>
+                    </div>
+                  </div>
+                </div>
+                <p class="tools__hint">Short press = dot (·), long press = dash (—). Morse code was the first digital communication!</p>
+              </div>
+            </div>
+
+            <!-- 3. Satellite Pass Predictor -->
+            <div class="tools__section" id="tool-satellite">
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">🛰️ Satellite Pass Predictor</span>
+                </div>
+                <div class="sim-panel__body" style="padding:var(--space-lg)">
+                  <div class="tools__sat-controls">
+                    <select id="sat-select" class="tools__select">
+                      <option value="ISS">🚀 ISS (145.80 MHz)</option>
+                      <option value="NOAA-15">🌤️ NOAA 15 (137.62 MHz)</option>
+                      <option value="NOAA-18">🌤️ NOAA 18 (137.91 MHz)</option>
+                      <option value="NOAA-19">🌤️ NOAA 19 (137.10 MHz)</option>
+                      <option value="METEOR-M2">🌤️ Meteor-M N2-3 (137.90 MHz)</option>
+                    </select>
+                    <button class="btn btn--sm btn--primary" id="sat-predict-btn">🔭 Predict Passes</button>
+                  </div>
+                  <div style="display:grid;grid-template-columns:280px 1fr;gap:var(--space-lg);margin-top:var(--space-lg)" class="tools__sat-grid">
+                    <canvas id="sat-sky-canvas" style="width:280px;height:280px;background:#0a1628;border-radius:50%;border:1px solid var(--color-border)"></canvas>
+                    <div id="sat-results"><p style="color:var(--color-text-secondary)">Select a satellite and click Predict to see upcoming passes from Paris.</p></div>
+                  </div>
+                </div>
+                <p class="tools__hint">Shows when satellites pass overhead. Green dot = rise, red dot = set. Uses simplified orbital mechanics — no internet needed!</p>
+              </div>
+            </div>
+
+            <!-- 4. Signal Puzzle Game -->
+            <div class="tools__section" id="tool-puzzle">
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">🧩 Signal Decoding Puzzle</span>
+                  <span style="color:var(--color-accent)">Score: <strong id="puzzle-score">0</strong> · Level <span id="puzzle-level">1/5</span></span>
+                </div>
+                <div class="sim-panel__body">
+                  <canvas id="puzzle-canvas" style="width:100%;height:220px;display:block;background:#0a1628;border-radius:8px 8px 0 0"></canvas>
+                  <div style="padding:var(--space-lg)">
+                    <div id="puzzle-question" style="margin-bottom:var(--space-md);line-height:1.6"></div>
+                    <div style="display:flex;gap:var(--space-sm);align-items:center;flex-wrap:wrap">
+                      <input type="text" id="puzzle-answer" class="tools__input" style="max-width:200px" placeholder="Your answer..." autocomplete="off">
+                      <button class="btn btn--sm btn--primary" id="puzzle-check">✅ Check</button>
+                      <button class="btn btn--sm btn--outline" id="puzzle-next" hidden>➡️ Next Level</button>
+                    </div>
+                    <div id="puzzle-feedback" style="margin-top:var(--space-sm);font-weight:600" aria-live="polite"></div>
+                  </div>
+                </div>
+                <p class="tools__hint">Find hidden signals on the spectrum! 5 levels from FM stations to IoT sensors. Type the frequency you find.</p>
+              </div>
+            </div>
+
+            <!-- 5. Antenna Builder Calculator -->
+            <div class="tools__section" id="tool-antenna">
+              <div class="sim-panel">
+                <div class="sim-panel__header">
+                  <span class="sim-panel__title">📐 Antenna Builder Calculator</span>
+                </div>
+                <div class="sim-panel__body" style="padding:var(--space-lg)">
+                  <div style="display:flex;gap:var(--space-sm);align-items:center;flex-wrap:wrap;margin-bottom:var(--space-lg)">
+                    <label style="font-weight:600">Target Frequency:</label>
+                    <input type="number" id="antenna-freq-input" class="tools__input" style="max-width:140px" value="145" min="1" max="10000" step="0.1">
+                    <span style="color:var(--color-text-secondary)">MHz</span>
+                    <button class="btn btn--sm btn--primary" id="antenna-calc-btn">📐 Calculate</button>
+                  </div>
+                  <canvas id="antenna-builder-canvas" style="width:100%;height:300px;display:block;background:#0a1628;border-radius:8px"></canvas>
+                  <div id="antenna-results" class="tools__antenna-results"></div>
+                </div>
+                <p class="tools__hint">Enter any frequency to get exact cut lengths for 4 antenna types. Print the dimensions and build with your kids!</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- MODULE CONTENT AREA -->
+        <section class="page page--module" id="page-module" hidden>
+          <div class="module-view" id="module-view">
+            <div class="module-view__header" id="module-header">
+              <!-- Populated by JS -->
+            </div>
+            <div class="module-view__content" id="module-content">
+              <!-- Populated by JS -->
+            </div>
+            <div class="module-view__nav" id="module-nav">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ── PROGRESS PAGE ── -->
+        <section class="page page--progress" id="page-progress" hidden>
+          <div id="progress-content"></div>
+        </section>
+
+        <!-- ── TEACHER/PARENT DASHBOARD ── -->
+        <section class="page page--dashboard" id="page-dashboard" hidden>
+          <div id="dashboard-content"></div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="app-footer">
+      <div class="app-footer__pattern"></div>
+      <div class="app-footer__content">
+        <span>SDR Kids Lab v1.0.0</span>
+        <span class="app-footer__sep">•</span>
+        <span>Educational &amp; Open Source</span>
+        <span class="app-footer__sep">•</span>
+        <span>Privacy-First &amp; Local-Only</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SVG DEFINITIONS                         -->
+  <!-- ══════════════════════════════════════ -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <defs>
+      <symbol id="ornament-line" viewBox="0 0 60 20">
+        <line x1="0" y1="10" x2="15" y2="10" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="18" cy="10" r="1.5" fill="currentColor" opacity="0.3"/>
+        <line x1="21" y1="10" x2="39" y2="10" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="42" cy="10" r="1.5" fill="currentColor" opacity="0.3"/>
+        <line x1="45" y1="10" x2="60" y2="10" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+      </symbol>
+      <!-- Islamic 8-pointed star -->
+      <symbol id="star-8" viewBox="0 0 100 100">
+        <polygon points="50,0 61,35 100,35 68,57 79,93 50,71 21,93 32,57 0,35 39,35" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.15"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SCRIPTS                                 -->
+  <!-- ══════════════════════════════════════ -->
+  <script src="js/storage.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/simulator/signal-generator.js"></script>
+  <script src="js/simulator/noise-simulator.js"></script>
+  <script src="js/simulator/spectrum-engine.js"></script>
+  <script src="js/simulator/waterfall-engine.js"></script>
+  <script src="js/simulator/modulation-engine.js"></script>
+  <script src="js/simulator/antenna-simulator.js"></script>
+  <script src="js/simulator/range-calculator.js"></script>
+  <script src="js/simulator/signal-library.js"></script>
+  <script src="js/simulator/labs-engine.js"></script>
+  <script src="js/module-content.js"></script>
+  <script src="js/modules/module-00-welcome.js"></script>
+  <script src="js/modules/module-01-history.js"></script>
+  <script src="js/modules/module-02-radio.js"></script>
+  <script src="js/modules/module-03-sdr.js"></script>
+  <script src="js/modules/module-04-frequency.js"></script>
+  <script src="js/modules/module-05-antenna.js"></script>
+  <script src="js/modules/module-06-modulation.js"></script>
+  <script src="js/modules/module-07-microbit.js"></script>
+  <script src="js/modules/module-08-esp32lora.js"></script>
+  <script src="js/modules/module-09-rtlsdr.js"></script>
+  <script src="js/modules/module-10-hackrf.js"></script>
+  <script src="js/modules/module-11-decoding.js"></script>
+  <script src="js/modules/module-12-iot.js"></script>
+  <script src="js/modules/module-13-security.js"></script>
+  <script src="js/modules/module-14-project.js"></script>
+  <script src="js/gamification.js"></script>
+  <script src="js/teacher-mode.js"></script>
+  <script src="js/search-sound.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/enhancements.js"></script>
+  <script src="js/genius-tools.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/playground.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Register Service Worker for PWA offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(reg => {
+        console.log('📡 SW registered:', reg.scope);
+      }).catch(err => console.warn('SW registration failed:', err));
+    }
+  </script>
+
+</body>
+</html>

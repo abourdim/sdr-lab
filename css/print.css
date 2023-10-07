@@ -1,0 +1,58 @@
+/* ═══════════════════════════════════════════
+   SDR KIDS LAB — PRINT STYLES
+   ═══════════════════════════════════════════ */
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  .sidebar,
+  .topbar,
+  .splash,
+  .search-overlay,
+  .app-footer,
+  .topbar__actions,
+  .home__actions,
+  .settings,
+  .sidebar__footer,
+  .module-view__nav {
+    display: none !important;
+  }
+
+  .main {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .bismillah-header {
+    border: none;
+    background: none;
+  }
+
+  .bismillah-header__text {
+    color: #333;
+  }
+
+  .home__hero {
+    background: none;
+    border: 1px solid #ccc;
+  }
+
+  .home__module-card,
+  .home__hardware-card,
+  .help-page__card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}

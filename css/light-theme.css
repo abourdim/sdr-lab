@@ -1,0 +1,48 @@
+/* ═══════════════════════════════════════════
+   SDR KIDS LAB — SKY LIGHT THEME
+   Light blue + deep gold + emerald
+   ═══════════════════════════════════════════ */
+
+[data-theme="light"] {
+  /* Backgrounds */
+  --color-bg: #f0f4f8;
+  --color-bg-elevated: #ffffff;
+  --color-surface: #e8eef4;
+  --color-hover: rgba(44, 82, 130, 0.06);
+
+  /* Text */
+  --color-text: #1a2332;
+  --color-text-secondary: #5a6f87;
+
+  /* Accent — Deep Gold */
+  --color-accent: #b8860b;
+  --color-accent-hover: #a07608;
+  --color-accent-shadow: rgba(184, 134, 11, 0.2);
+  --color-accent-subtle: rgba(184, 134, 11, 0.08);
+
+  /* Signal — Teal */
+  --color-signal: #0097a7;
+  --color-signal-subtle: rgba(0, 151, 167, 0.08);
+
+  /* Semantic */
+  --color-success: #27ae60;
+  --color-success-subtle: rgba(39, 174, 96, 0.1);
+  --color-warning: #e67e22;
+  --color-warning-subtle: rgba(230, 126, 34, 0.1);
+  --color-danger: #c0392b;
+  --color-danger-subtle: rgba(192, 57, 43, 0.1);
+
+  /* Border & Shadow */
+  --color-border: rgba(44, 82, 130, 0.12);
+  --color-shadow: rgba(44, 82, 130, 0.08);
+
+  /* Gradient */
+  --gradient-hero: linear-gradient(135deg, #e8f0fe 0%, #f0f4f8 50%, #e4ecf5 100%);
+
+  color-scheme: light;
+}
+
+[data-theme="light"] body {
+  background-color: #f0f4f8;
+  color: #1a2332;
+}
